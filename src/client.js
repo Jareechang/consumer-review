@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom';
+import { render } from 'react-dom'
+
+/* Components */
+
+import Tweet from './components/Tweet'
 
 class App extends Component {
 
@@ -8,9 +12,7 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div> new app </div>
-    )
+    return (<Tweet />)
   }
 }
 
