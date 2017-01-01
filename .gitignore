@@ -1,7 +1,6 @@
 *.swp
 node_modules/*
 
-src
 webpack.config.js
 tweets.json
 
