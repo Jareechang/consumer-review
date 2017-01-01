@@ -1,0 +1,10 @@
+*.swp
+node_modules/*
+
+src
+webpack.config.js
+tweets.json
+
+# ignore server for now
+server.js
+.env
