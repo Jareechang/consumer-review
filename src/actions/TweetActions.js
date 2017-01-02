@@ -5,14 +5,11 @@ import alt from '../alt'
 
 class TweetActions {
   fetchTweets() {
-    const callUpdateTweets = tweets => this.updateTweets(tweets)
-    const handleRequestError = errorMessage = this.tweetsFailed(errorMessage)
-
     return (dispatch) => {
       dispatch()
       TweetSource.fetch()
-        .then(callUpdateTweets)
-        .catch(handleRequestError)
+        .then(tweets => this.updateTweets(tweets))
+        .catch(errorMessage => this.tweetsFailed(errorMessage))
     }
   }
 
