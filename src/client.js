@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 
 /* Components */
 
-import Tweet from './components/Tweet'
+import TweetContainer from './components/Tweets/index'
 
 class App extends Component {
 
@@ -12,7 +12,18 @@ class App extends Component {
   }
 
   render() {
-    return (<Tweet />)
+    return (
+      <div className='row'>
+        <div className='container'>
+          <div className='col-md-8'>
+            <TweetContainer />
+          </div>
+          <div className='col-md-4'>
+            sidebar goes here
+          </div>
+        </div>
+      </div>
+    )
   }
 }
 

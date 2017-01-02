@@ -1,24 +1,13 @@
 import React, { Component } from 'react'
 
+/* Components  */
+import TweetInfo from './TweetInfo'
+
 /* Store */
-import TweetStore from '../stores/TweetStore'
+import TweetStore from '../../stores/TweetStore'
 
 /* Actions */
-import TweetActions from '../actions/TweetActions'
-
-const TweetInfo = ({ text, created_at, entities }) => (
-  <div>
-    <p> text: {text} </p>
-    <p> created at: {created_at} </p>
-    {
-      entities.user_mentions.map(user => {
-        return <div key={user.id} style={{ padding: '10px' }}>
-          {user.name}({user.screen_name})
-          </div>
-      })
-    }
-    </div>
-)
+import TweetActions from '../../actions/TweetActions'
 
 export default class Tweet extends Component {
   constructor(props) {
@@ -43,11 +32,17 @@ export default class Tweet extends Component {
   }
 
   renderTweetContainer(tweets) {
+    const { styles } = this.props
     return tweets.map(tweet => (
         <div key={tweet.id}>
-          <p> user: {tweet.user.name}</p>
+          <p>
+          {tweet.user.name}
+          <span className={styles.screenName}>
+            @{tweet.user.screen_name}
+          </span>
+          </p>
           <img src={tweet.user.profile_image_url} />
-          <TweetInfo {...tweet} />
+          <TweetInfo {...tweet} styles={styles} />
         </div>
       )
     )
