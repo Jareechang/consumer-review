@@ -9,15 +9,21 @@ const T = new Twit({
   timeout_ms: 60*1000
 })
 
-const tweetsFile = './tweets.json'
-
-const saveTweetsToFile = function(err, data, response) {
-  fs.writeFile(tweetsFile, JSON.stringify(data), (err) => {
+const handleAction = (action) => {
+  return (err) => {
     if (err) {
       console.log(err)
     }
-    console.log('very nice, how mach! tweets saved')
-  })
+    actions()
+  }
+}
+
+const tweetsFile = './tweets.json'
+
+const saveTweetsToFile = function(err, data, response) {
+  fs.writeFile(tweetsFile, JSON.stringify(data),
+    handleAction(console.log('data saved to json file: ' + tweetsFile))
+  )
 }
 
 const readTweetFromFile = function() {

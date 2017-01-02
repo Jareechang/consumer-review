@@ -3,13 +3,24 @@ import alt from '../alt'
 
 class TweetStore {
   constructor() {
-    this.tweets = [];
+    this.tweets = []
     this.bindListeners({
-      handleUpdateTweets: TweetActions.UPDATE_TWEETS
+      handleUpdateTweets: TweetActions.UPDATE_TWEETS,
+      handleFetchTweets: TweetActions.FETCH_TWEETS,
+      handleTweetsFailed: TweetActions.TWEETS_FAILED
     })
   }
+
+  handleFetchTweets(tweets) {
+    this.tweets = [] // reset tweets
+  }
+
+  handleTweetsFailed(errorMessage) {
+    this.errorMessage = errorMessage
+  }
+
   handleUpdateTweets(tweets) {
-    this.tweets = tweets;
+    this.tweets = tweets
   }
 }
 
