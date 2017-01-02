@@ -34,14 +34,16 @@ export default class Tweet extends Component {
   renderTweetContainer(tweets) {
     const { styles } = this.props
     return tweets.map(tweet => (
-        <div key={tweet.id}>
-          <p>
-          {tweet.user.name}
-          <span className={styles.screenName}>
-            @{tweet.user.screen_name}
-          </span>
-          </p>
-          <img src={tweet.user.profile_image_url} />
+        <div className={styles.tweetSection} key={tweet.id}>
+          <div className={styles.userDisplay}>
+            <img className={styles.userImage} src={tweet.user.profile_image_url} />
+            <p className={styles.userName}>
+              {tweet.user.name}
+              <span className={styles.screenName}>
+                @{tweet.user.screen_name}
+              </span>
+            </p>
+          </div>
           <TweetInfo {...tweet} styles={styles} />
         </div>
       )
@@ -66,7 +68,6 @@ export default class Tweet extends Component {
     /* Make Tweet Card component */
     return (
       <div>
-        <div>tweets goes here</div>
         {this.renderTweetContainer(tweets)}
       </div>
     )

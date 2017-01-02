@@ -1,19 +1,19 @@
 import React from 'react'
 
 const TweetInfo = ({ text, created_at, entities, styles }) => (
-  <div>
-    <p> text: {text} </p>
+  <div className={styles.tweetInfo}>
+    <p>{text} </p>
     <p> created at: {created_at} </p>
     <p style={{ fontWeight: 'bold' }}> Mentions: </p>
     {
       entities.user_mentions.map(user => {
-        return <div key={user.id} style={{ padding: '10px' }}>
+        return <div key={user.id} className={styles.userMentions}>
           {user.name}
-        (<span className={styles.screenName}>@{user.screen_name}</span>)
+          <span className={styles.screenName}>@{user.screen_name}</span>
         </div>
       })
     }
-    </div>
+  </div>
 )
 
 export default TweetInfo
