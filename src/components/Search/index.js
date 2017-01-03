@@ -1,25 +1,44 @@
 import React, { Component } from 'react'
 import { users as friends } from '../../../friends.json'
 
+import FriendStore from '../../stores/FriendStore'
+import FriendActions from '../../actions/FriendActions'
 import styles from './styles.css'
 
+window.FriendActions = FriendActions
 export default class Search extends Component {
   constructor(props) {
     super(props)
     this.state = {
       text: '',
-      matches: []
+      matches: FriendStore.getState().friends
     }
     this.handleTextChange = this.handleTextChange.bind(this)
+    this._onChange = this._onChange.bind(this)
+  }
+
+  componentDidMount() {
+    FriendStore.listen(this._onChange)
+  }
+
+  componentWillUnmount() {
+    FriendStore.unlisten(this._onChange)
+  }
+
+  _onChange(state) {
+    this.setState({
+      matches: state.friends
+    })
   }
 
   handleTextChange(e) {
     this.setState({
-      text: e.target.value,
-      matches: e.target.value === '' ? [] : friends.filter(friend =>
-        friend.name.match(new RegExp(e.target.value, 'i'))
-      )
+      text: e.target.value
     })
+    if (e.target.value === '') {
+      return FriendActions.resetFriends()
+    }
+    FriendActions.filterFriends(e.target.value)
   }
 
   render() {
