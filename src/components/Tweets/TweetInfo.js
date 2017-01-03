@@ -1,8 +1,10 @@
 import React from 'react'
 
-const TweetInfo = ({ text, created_at, entities, styles }) => (
+const TweetInfo = ({ full_text: fullText, created_at, entities, styles }) => (
   <div className={styles.tweetInfo}>
-    <p>{text} </p>
+    <p className={styles.tweetPara}>
+      {fullText}
+    </p>
     <p> created at: {created_at} </p>
     <p style={{ fontWeight: 'bold' }}> Mentions: </p>
     {

@@ -33,6 +33,7 @@ export default class Tweet extends Component {
 
   renderTweetContainer(tweets) {
     const { styles } = this.props
+    console.log(tweets)
     return tweets.map(tweet => (
         <div className={styles.tweetSection} key={tweet.id}>
           <div className={styles.userDisplay}>

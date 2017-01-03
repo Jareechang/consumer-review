@@ -14,8 +14,8 @@
 
 .userDisplay {
   border-radius: 30px;
-  background: #1da1f2;
-  background: linear-gradient(to right, #FFF, #6caed6);
+  background: #a8d0e9;
+  background: linear-gradient(to right, #FFF, #a8d0e9);
 }
 
 .tweetInfo {
@@ -24,7 +24,14 @@
   padding: 25px;
 }
 
+.tweetPara {
+  padding: 15px;
+  color: #514a4a;
+  font-size: 20px;
+}
+
 .userImage {
+  border-radius: 50%;
   display: inline-block;
 }
 

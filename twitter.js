@@ -14,7 +14,7 @@ const handleAction = (action) => {
     if (err) {
       console.log(err)
     }
-    actions()
+    action()
   }
 }
 
@@ -31,7 +31,7 @@ const readTweetFromFile = function() {
     if (err) {
       console.log(err)
     } else if (!data) {
-      T.get('statuses/user_timeline', { screen_name: 'addyosmani', count: 10 }, saveTweetsToFile)
+      T.get('statuses/user_timeline', { screen_name: 'addyosmani', count: 10, tweet_mode: 'extended' }, saveTweetsToFile)
     }
     console.log('getting tweets from FS')
   })
