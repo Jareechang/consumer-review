@@ -12,11 +12,6 @@ class FriendStore {
   handleUpdateFriends(friends) {
     this.friends = friends
   }
-
-  handleFilterFriends(filter) {
-    console.log(filter)
-    this.filter = filter
-  }
 }
 
 export default alt.createStore(FriendStore, 'FriendStore')

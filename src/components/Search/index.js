@@ -5,7 +5,6 @@ import FriendStore from '../../stores/FriendStore'
 import FriendActions from '../../actions/FriendActions'
 import styles from './styles.css'
 
-window.FriendActions = FriendActions
 export default class Search extends Component {
   constructor(props) {
     super(props)

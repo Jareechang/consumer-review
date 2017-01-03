@@ -1,4 +1,3 @@
-import React from 'react'
 import alt from '../alt'
 
 /* JSON source*/
@@ -16,11 +15,9 @@ class FriendActions {
   }
 
   filterFriends(text) {
-    return (dispatch) => {
-      this.updateFriends(friends.filter(
-        friend => friend.name.match(new RegExp(text, 'i'))
-      ))
-    }
+    this.updateFriends(friends.filter(
+      friend => friend.name.match(new RegExp(text, 'i'))
+    ))
   }
 
   resetFriends() {
