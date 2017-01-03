@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 const TweetInfo = ({ full_text: fullText, created_at, entities, styles }) => (
   <div className={styles.tweetInfo}>
@@ -17,5 +17,12 @@ const TweetInfo = ({ full_text: fullText, created_at, entities, styles }) => (
     }
   </div>
 )
+
+TweetInfo.propTypes = {
+  full_text: PropTypes.string.isRequired,
+  created_at: PropTypes.string.isRequired,
+  entities: PropTypes.object.isRequired,
+  styles: PropTypes.object.isRequired
+}
 
 export default TweetInfo
