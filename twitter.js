@@ -9,6 +9,12 @@ const T = new Twit({
   timeout_ms: 60*1000
 })
 
+const log = (text) => {
+  return _  => (
+    console.log(text)
+  )
+}
+
 const handleAction = (action) => {
   return (err) => {
     if (err) {
@@ -22,7 +28,9 @@ const tweetsFile = './tweets.json'
 
 const saveTweetsToFile = function(err, data, response) {
   fs.writeFile(tweetsFile, JSON.stringify(data),
-    handleAction(console.log('data saved to json file: ' + tweetsFile))
+    handleAction(
+      log('data saved to json file: ' + tweetsFile)
+    )
   )
 }
 
@@ -36,5 +44,11 @@ const readTweetFromFile = function() {
     console.log('getting tweets from FS')
   })
 }
+
+T.get('/friends/list', {}, (err, data ,response) => {
+  fs.writeFile('./friends.json', JSON.stringify(data),
+    handleAction(log('saving friends list to friends.json'))
+  )
+})
 
 readTweetFromFile();

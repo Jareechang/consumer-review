@@ -3,6 +3,7 @@ node_modules/*
 
 webpack.config.js
 tweets.json
+friends.json
 
 # ignore server for now
 server.js
