@@ -42,7 +42,13 @@ export default class Search extends Component {
 
   render() {
     const renderMatchedResults = users =>
-      users.map(user => <p> {user.name} </p>)
+      users.map(user =>
+        ( <div>
+            <img className={styles.userImage} src={user.profile_image_url} />
+            <p className={styles.userName}> {user.name} </p>
+          </div>
+        )
+      )
 
     const hasMatches = () => this.state.matches.length > 0
 
