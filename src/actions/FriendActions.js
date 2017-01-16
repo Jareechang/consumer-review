@@ -24,7 +24,10 @@ class FriendActions {
   }
 
   resetFriends() {
-    this.updateFriends([])
+    return (dispatch) => {
+      dispatch()
+      this.updateFriends([])
+    }
   }
 
   updateFriends(friends) {
