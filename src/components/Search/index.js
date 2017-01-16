@@ -31,19 +31,21 @@ export default class Search extends Component {
   }
 
   handleTextChange(e) {
+    const emptyTextField = value => value === ''
+
     this.setState({
       text: e.target.value
     })
-    if (e.target.value === '') {
-      return FriendActions.resetFriends()
-    }
-    FriendActions.filterFriends(e.target.value)
+
+    emptyTextField(e.target.value) ?
+      FriendActions.resetFriends()
+      : FriendActions.filterFriends(e.target.value)
   }
 
   render() {
     const renderMatchedResults = users =>
       users.map(user =>
-        ( <div>
+        ( <div key={user.id}>
             <img className={styles.userImage} src={user.profile_image_url} />
             <p className={styles.userName}> {user.name} </p>
           </div>

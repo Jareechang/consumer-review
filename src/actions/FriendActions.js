@@ -15,9 +15,12 @@ class FriendActions {
   }
 
   filterFriends(text) {
-    this.updateFriends(friends.filter(
-      friend => friend.name.match(new RegExp(text, 'i'))
-    ))
+    return (dispatch) => {
+      dispatch()
+      this.updateFriends(friends.filter(
+        friend => friend.name.match(new RegExp(text, 'i'))
+      ))
+    }
   }
 
   resetFriends() {
