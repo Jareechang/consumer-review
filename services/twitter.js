@@ -26,7 +26,7 @@ const handleAction = (action) => {
 
 const tweetsFile = './tweets.json'
 
-const saveTweetsToFile = function(err, data, response) {
+saveTweetsToFile = function(err, data, response) {
   fs.writeFile(tweetsFile, JSON.stringify(data),
     handleAction(
       log('data saved to json file: ' + tweetsFile)
@@ -34,21 +34,30 @@ const saveTweetsToFile = function(err, data, response) {
   )
 }
 
-const readTweetFromFile = function() {
+readTweetFromFile = function() {
   fs.readFile(tweetsFile, 'utf-8', function(err, data) {
     if (err) {
       console.log(err)
     } else if (!data) {
       T.get('statuses/user_timeline', { screen_name: 'addyosmani', count: 10, tweet_mode: 'extended' }, saveTweetsToFile)
     }
-    console.log('getting tweets from FS')
   })
 }
 
-T.get('/friends/list', {}, (err, data ,response) => {
-  fs.writeFile('./friends.json', JSON.stringify(data),
-    handleAction(log('saving friends list to friends.json'))
+exports.getTweetsByUsername = function(name) {
+  return T.get('statuses/user_timeline',
+      {
+        screen_name: name,
+        count: 10,
+        tweet_mode: 'extended'
+      }
   )
-})
+}
 
-readTweetFromFile();
+//T.get('/friends/list', {}, (err, data ,response) => {
+  //fs.writeFile('./friends.json', JSON.stringify(data),
+    //handleAction(log('saving friends list to friends.json'))
+  //)
+//})
+
+//readTweetFromFile();
