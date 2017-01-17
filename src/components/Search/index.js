@@ -44,8 +44,9 @@ export default class Search extends Component {
   }
 
   render() {
-    const updateTweetsFrom = (user) =>
+    const updateTweetsFrom = (user) => (
       _ => TweetActions.fetchTweets(user.screen_name)
+    )
 
     const renderMatchedResults = users =>
       users.map(user =>

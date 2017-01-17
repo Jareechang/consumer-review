@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "git@github.com:Jareechang/simple-react-tasks.git",
   "scripts": {
-    "start": "webpack-dev-server --content-base src --inline --hot",
+    "start": "webpack-dev-server --content-base src --inline --hot --port 3000",
     "lint": "eslint -c .eslintrc src"
   },
   "author": "",
