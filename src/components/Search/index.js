@@ -43,9 +43,15 @@ export default class Search extends Component {
   }
 
   render() {
+    const updateTweetsFrom = (user) => {
+      return (e) => {
+        console.log(user)
+        console.log(e)
+      }
+    }
     const renderMatchedResults = users =>
       users.map(user =>
-        ( <div key={user.id}>
+        ( <div key={user.id} onClick={updateTweetsFrom(user)}>
             <img className={styles.userImage} src={user.profile_image_url} />
             <p className={styles.userName}> {user.name} </p>
           </div>
