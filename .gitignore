@@ -1,7 +1,6 @@
 *.swp
 node_modules/*
 
-webpack.config.js
 tweets.json
 friends.json
 

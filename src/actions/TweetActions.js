@@ -4,7 +4,7 @@ import TweetSource from '../sources/TweetSource'
 import alt from '../alt'
 
 class TweetActions {
-  fetchTweets() {
+  fetchTweets(query = '') {
     return (dispatch) => {
       dispatch()
       TweetSource.fetch()

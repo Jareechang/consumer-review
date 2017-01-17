@@ -3,6 +3,7 @@ import { users as friends } from '../../../friends.json'
 
 import FriendStore from '../../stores/FriendStore'
 import FriendActions from '../../actions/FriendActions'
+import TweetActions from '../../actions/TweetActions'
 import styles from './styles.css'
 
 export default class Search extends Component {
@@ -43,12 +44,9 @@ export default class Search extends Component {
   }
 
   render() {
-    const updateTweetsFrom = (user) => {
-      return (e) => {
-        console.log(user)
-        console.log(e)
-      }
-    }
+    const updateTweetsFrom = (user) =>
+      _ => TweetActions.fetchTweets(user.screen_name)
+
     const renderMatchedResults = users =>
       users.map(user =>
         ( <div key={user.id} onClick={updateTweetsFrom(user)}>
