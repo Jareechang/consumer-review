@@ -44,10 +44,7 @@ export default class Search extends Component {
   }
 
   render() {
-    const updateTweetsFrom = (user) => (
-      _ => TweetActions.fetchTweets(user.screen_name)
-    )
-
+    const updateTweetsFrom = user => TweetActions.fetchTweetsByUserName(user.screen_name)
     const renderMatchedResults = users =>
       users.map(user =>
         ( <div key={user.id} onClick={updateTweetsFrom(user)}>

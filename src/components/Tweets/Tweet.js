@@ -20,7 +20,7 @@ export default class Tweet extends Component {
   componentDidMount() {
     TweetStore.listen(this._onChange)
 
-    TweetActions.fetchTweets()
+    TweetActions.fetchTweetsByUsername()
   }
 
   componentWillUnmount() {
@@ -28,6 +28,7 @@ export default class Tweet extends Component {
   }
 
   _onChange(state) {
+    console.log(state)
     this.setState(state)
   }
 

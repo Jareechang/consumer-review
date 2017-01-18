@@ -6,7 +6,7 @@ class TweetStore {
     this.tweets = []
     this.bindListeners({
       handleUpdateTweets: TweetActions.UPDATE_TWEETS,
-      handleFetchTweets: TweetActions.FETCH_TWEETS,
+      handleFetchTweets: TweetActions.FETCH_TWEETS_BY_USERNAME,
       handleTweetsFailed: TweetActions.TWEETS_FAILED
     })
   }
