@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 /* Components  */
 import TweetInfo from './TweetInfo'
@@ -15,6 +15,10 @@ export default class Tweet extends Component {
     this.state = TweetStore.getState()
     this._onChange = this._onChange.bind(this)
     this.renderTweetContainer = this.renderTweetContainer.bind(this)
+  }
+
+  static propTypes = {
+    styles: PropTypes.object.isRequired
   }
 
   componentDidMount() {
@@ -75,3 +79,5 @@ export default class Tweet extends Component {
     )
   }
 }
+
+
