@@ -44,17 +44,19 @@ export default class Search extends Component {
   }
 
   render() {
-    const updateTweetsFrom = user => TweetActions.fetchTweetsByUserName(user.screen_name)
-    const renderMatchedResults = users =>
-      users.map(user =>
-        ( <div key={user.id} onClick={updateTweetsFrom(user)}>
-            <img className={styles.userImage} src={user.profile_image_url} />
-            <p className={styles.userName}> {user.name} </p>
-          </div>
-        )
-      )
-
     const hasMatches = () => this.state.matches.length > 0
+    /* Need to move to separate folder later  */
+    const updateTweetsFrom = user =>
+      _ => TweetActions.fetchTweetsByUsername(user.screen_name)
+
+    const userAutocompleteDisplay = (user) =>
+      (<div key={user.id} onClick={updateTweetsFrom(user)}>
+          <img className={styles.userImage} src={user.profile_image_url} />
+          <p className={styles.userName}> {user.name} </p>
+        </div>)
+
+    const renderMatchedResults = users =>
+      users.map(user => userAutocompleteDisplay(user))
 
     return (
       <div className={styles.searchSection}>

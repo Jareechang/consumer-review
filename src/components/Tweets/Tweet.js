@@ -28,7 +28,6 @@ export default class Tweet extends Component {
   }
 
   _onChange(state) {
-    console.log(state)
     this.setState(state)
   }
 
