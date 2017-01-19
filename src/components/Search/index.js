@@ -46,14 +46,16 @@ export default class Search extends Component {
   render() {
     const hasMatches = () => this.state.matches.length > 0
     /* Need to move to separate folder later  */
-    const updateTweetsFrom = user =>
+    const fetchTweetsBy = user =>
       _ => TweetActions.fetchTweetsByUsername(user.screen_name)
 
     const userAutocompleteDisplay = (user) =>
-      (<div key={user.id} onClick={updateTweetsFrom(user)}>
+      (
+        <div key={user.id} onClick={fetchTweetsBy(user)}>
           <img className={styles.userImage} src={user.profile_image_url} />
           <p className={styles.userName}> {user.name} </p>
-        </div>)
+        </div>
+      )
 
     const renderMatchedResults = users =>
       users.map(user => userAutocompleteDisplay(user))
