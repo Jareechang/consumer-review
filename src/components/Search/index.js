@@ -39,22 +39,28 @@ export default class Search extends Component {
     })
 
     emptyTextField(e.target.value) ?
-      FriendActions.resetFriends()
-      : FriendActions.filterFriends(e.target.value)
+      FriendActions.resetFriends() : FriendActions.filterFriends(e.target.value)
   }
 
   render() {
     const hasMatches = () => this.state.matches.length > 0
-    const resetSearchAndGetTweetsBy = user => {
-      return _ =>  {
-        TweetActions.fetchTweetsByUsername(user.screen_name)
-        this.state.text = ''
-        FriendActions.resetFriends()
+    const SearchComponent = this
+
+    const resetSearchAndGetTweetsBy = user => (
+      {
+        injectContext(context) {
+          return _ => {
+            TweetActions.fetchTweetsByUsername(user.screen_name) && \
+            context.state.text = '' && \
+            FriendActions.resetFriends()
+          }
+        }
       }
-    }
+    )
 
     /* Need to move to separate folder later  */
-    const fetchTweetsBy = user => resetSearchAndGetTweetsBy.call(this, user)
+    const fetchTweetsBy = user =>
+      resetSearchAndGetTweetsBy(user).injectContext(SearchComponent)
 
     const userAutocompleteDisplay = (user) =>
       (
