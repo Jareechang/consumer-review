@@ -44,11 +44,17 @@ export default class Search extends Component {
   }
 
   render() {
-    console.log(this.state.matches)
     const hasMatches = () => this.state.matches.length > 0
+    const resetSearchAndGetTweetsBy = user => {
+      return _ =>  {
+        TweetActions.fetchTweetsByUsername(user.screen_name)
+        this.state.text = ''
+        FriendActions.resetFriends()
+      }
+    }
+
     /* Need to move to separate folder later  */
-    const fetchTweetsBy = user =>
-      _ => TweetActions.fetchTweetsByUsername(user.screen_name)
+    const fetchTweetsBy = user => resetSearchAndGetTweetsBy.call(this, user)
 
     const userAutocompleteDisplay = (user) =>
       (
