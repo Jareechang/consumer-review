@@ -39,7 +39,8 @@ export default class Search extends Component {
     })
 
     emptyTextField(e.target.value) ?
-      FriendActions.resetFriends() : FriendActions.filterFriends(e.target.value)
+      FriendActions.resetFriends()
+      : FriendActions.filterFriends(e.target.value)
   }
 
   render() {
@@ -50,8 +51,8 @@ export default class Search extends Component {
       {
         injectContext(context) {
           return _ => {
-            TweetActions.fetchTweetsByUsername(user.screen_name) && \
-            context.state.text = '' && \
+            TweetActions.fetchTweetsByUsername(user.screen_name)
+            context.state.text = ''
             FriendActions.resetFriends()
           }
         }
