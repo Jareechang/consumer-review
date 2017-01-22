@@ -8,6 +8,7 @@ class FriendActions {
   fetchFriends() {
     return (dispatch) => {
       dispatch()
+      console.log(friends)
       setTimeout(() => {
         this.updateFriends(friends)
       }, 1000)

@@ -44,6 +44,7 @@ export default class Search extends Component {
   }
 
   render() {
+    console.log(this.state.matches)
     const hasMatches = () => this.state.matches.length > 0
     /* Need to move to separate folder later  */
     const fetchTweetsBy = user =>

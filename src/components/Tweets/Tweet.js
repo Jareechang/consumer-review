@@ -48,7 +48,10 @@ export default class Tweet extends Component {
               </span>
             </p>
           </div>
-          <TweetInfo {...tweet} styles={styles} />
+          <TweetInfo
+            {...tweet}
+            styles={styles}
+          />
         </div>
       )
     )
