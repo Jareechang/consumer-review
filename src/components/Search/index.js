@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { users as friends } from '../../../friends.json'
+//import { users as friends } from '../../../friends.json'
 
 import FriendStore from '../../stores/FriendStore'
 import FriendActions from '../../actions/FriendActions'

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import TweetSource from '../sources/TweetSource'
 import alt from '../alt'
 
@@ -18,6 +16,7 @@ class TweetActions {
   }
 
   updateTweets(tweets) {
+    console.log('updating tweets');
     return tweets
   }
 }

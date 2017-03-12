@@ -11,7 +11,7 @@ class TweetStore {
     })
   }
 
-  handleFetchTweets(tweets) {
+  handleFetchTweets() {
     this.tweets = [] // reset tweets
   }
 

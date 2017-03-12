@@ -26,7 +26,7 @@ const handleAction = (action) => {
 
 const tweetsFile = './tweets.json'
 
-saveTweetsToFile = function(err, data, response) {
+const saveTweetsToFile = function(err, data, response) {
   fs.writeFile(tweetsFile, JSON.stringify(data),
     handleAction(
       log('data saved to json file: ' + tweetsFile)
@@ -34,7 +34,7 @@ saveTweetsToFile = function(err, data, response) {
   )
 }
 
-readTweetFromFile = function() {
+const readTweetFromFile = function() {
   fs.readFile(tweetsFile, 'utf-8', function(err, data) {
     if (err) {
       console.log(err)

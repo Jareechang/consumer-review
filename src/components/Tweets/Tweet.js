@@ -69,15 +69,14 @@ export default class Tweet extends Component {
       )
     }
 
-    if (tweets.length === 0) {
+    if (!tweets) {
       return (<div> loading... </div>)
     }
 
-    const { data: { data : tweetFeed } } = tweets
     /* Make Tweet Card component */
     return (
       <div>
-        {this.renderTweetContainer(tweetFeed)}
+        {this.renderTweetContainer(tweets)}
       </div>
     )
   }
