@@ -11,6 +11,7 @@ export default class Search extends Component {
     super(props)
     this.state = {
       text: '',
+      friendList: FriendStore.getState().friends,
       matches: FriendStore.getState().friends
     }
     this.handleTextChange = this.handleTextChange.bind(this)
@@ -33,6 +34,9 @@ export default class Search extends Component {
 
   handleTextChange(e) {
     const emptyTextField = value => value === ''
+    const {
+      friendList
+    } = this.state;
 
     this.setState({
       text: e.target.value
@@ -40,7 +44,7 @@ export default class Search extends Component {
 
     emptyTextField(e.target.value) ?
       FriendActions.resetFriends()
-      : FriendActions.filterFriends(e.target.value)
+      : FriendActions.filterFriends(e.target.value, friendList);
   }
 
   render() {

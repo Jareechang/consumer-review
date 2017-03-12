@@ -23,8 +23,11 @@ export default class Tweet extends Component {
 
   componentDidMount() {
     TweetStore.listen(this._onChange)
+    const { tweets } = this.state;
 
-    TweetActions.fetchTweetsByUsername()
+    if (!tweets) {
+      TweetActions.fetchTweetsByUsername()
+    }
   }
 
   componentWillUnmount() {

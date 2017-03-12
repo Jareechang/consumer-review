@@ -9,3 +9,4 @@ friends.json
 
 # dist assets
 dist/
+*.log

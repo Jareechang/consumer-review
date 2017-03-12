@@ -1,19 +1,32 @@
 var debug = process.env.NODE_ENV !== "production";
+
 var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 
 var publicPath = debug ? '/' : '/';
 
-const envPlugin = new webpack.DefinePlugin({
-  'process.env': {
-    'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-  }
-})
+
+/* Development plugins */
+const developmentPlugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    }
+  })
+];
+
+/* Production plugins */
+const productionPlugins = [
+  new webpack.optimize.DedupePlugin(),
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
+];
 
 module.exports = {
   context: path.join(__dirname, "src"),
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./client.js",
+  entry: "./index.js",
   module: {
     preLoaders: [
       {
@@ -52,14 +65,10 @@ module.exports = {
   },
   output: {
     path: __dirname + "/dist/",
-    filename: "client.min.js",
+    filename: "index.min.js",
     publicPath: publicPath
   },
   plugins: debug
-    ? [envPlugin]
-    : [
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-    ],
+    ? developmentPlugins
+    : productionPlugins
 };

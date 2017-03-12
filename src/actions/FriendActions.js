@@ -1,24 +1,23 @@
 import alt from '../alt'
 
 /* JSON source*/
-import { users as friends } from '../../friends.json'
+//import { users as friends } from '../../friends.json'
 
 class FriendActions {
 
   fetchFriends() {
     return (dispatch) => {
       dispatch()
-      console.log(friends)
       setTimeout(() => {
         this.updateFriends(friends)
       }, 1000)
     }
   }
 
-  filterFriends(text) {
+  filterFriends(text, friendList) {
     return (dispatch) => {
       dispatch()
-      this.updateFriends(friends.filter(
+      this.updateFriends(friendList.filter(
         friend => friend.name.match(new RegExp(text, 'i'))
       ))
     }

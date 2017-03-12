@@ -1,4 +1,4 @@
-import tweets from '../../tweets.json'
+//import tweets from '../../tweets.json'
 //import axios from 'axios'
 //const API_ROOT = 'http://localhost:8080'
 

@@ -9,6 +9,16 @@ const ReactRouter = require('react-router');
 const match = ReactRouter.match;
 const RouterContext = ReactRouter.RouterContext;
 
+
+/* Preloaded data */
+const tweets = require('./tweets.json');
+const friends = require('./friends.json').users;
+
+const appPreloadState = JSON.stringify({
+  friends: friends,
+  tweets: tweets
+});
+
 /* Asset pipeline handling  */
 const outputFileName = webpackConfig.output.filename;
 
@@ -38,10 +48,9 @@ module.exports = {
       } else if (redirectLocation) {
         res.redirect(302, redirectionLocation.pathName + redirectionLocation.search);
       } else if (renderProps) {
-        let body = renderToString(React.createElement(RouterContext, renderProps));
         res.status(200).write(template({
-          injectReactApp: body,
-          clientAssetPath: getAssetPath(this.assetRootPath)
+          clientAssetPath: getAssetPath(this.assetRootPath),
+          appPreloadState: appPreloadState
         }));
         res.end();
       } else {
