@@ -2,8 +2,6 @@ const _ = require('lodash');
 const fs = require('fs');
 const serverRootPath = '/news';
 const React = require('react');
-const ReactDomServer = require('react-dom/server');
-const renderToString = ReactDomServer.renderToString;
 const ReactRouter = require('react-router');
 const match = ReactRouter.match;
 const RouterContext = ReactRouter.RouterContext;
@@ -40,7 +38,9 @@ module.exports = {
       } else if (renderProps) {
         res.status(200).write(template({
           clientAssets: assetPipeline.getClientAssets(this.assetRootPath),
-          appPreloadState: appPreloadState
+          appPreloadState: appPreloadState,
+          serverRendering: true,
+          serverRenderProps: JSON.stringify(renderProps)
         }));
         res.end();
       } else {
