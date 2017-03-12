@@ -5,7 +5,6 @@ tweets.json
 friends.json
 
 # ignore server for now
-server.js
 .env
 
 # dist assets
