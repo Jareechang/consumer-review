@@ -38,7 +38,7 @@ app.get(['/api/tweets/', '/api/tweets/:screenName'], (req, res) => {
     .then(sendData(res));
 })
 
-app.get('/', (req, res) => res.redirect(ServerRendering.rootPath));
+app.get('/', (req, res) => res.redirect(serverRootPath));
 
 app.get('/news*', (req, res) => {
   ServerRendering.match(req, res);

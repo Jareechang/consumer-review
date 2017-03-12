@@ -6,9 +6,6 @@ import routes from './routes/routes';
 
 const entry = document.getElementById('entry')
 
-import alt from './alt';
-
-window.alt = alt;
 const router = (
   <Router history={browserHistory}>
     {routes}

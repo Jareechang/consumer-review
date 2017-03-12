@@ -10,7 +10,6 @@ var TweetSource = {
         resolve(tweets)
       }, 1500)
     })
-    //console.log(`getting tweets for: ${screenName}`);
     //return axios.get(`${API_ROOT}/api/tweets/${screenName}`)
   }
 }
