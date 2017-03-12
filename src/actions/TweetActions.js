@@ -16,7 +16,6 @@ class TweetActions {
   }
 
   updateTweets(tweets) {
-    console.log('updating tweets');
     return tweets
   }
 }
