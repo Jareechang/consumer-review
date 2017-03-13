@@ -8,7 +8,7 @@ import alt from './alt'
 import bootstrap from './appBootstrap'
 import defaultRoutes from './routes/routes'
 
-const entry = document.getElementById('entry')
+const domEntryElement = document.getElementById('entry')
 
 const getRouter = routes => {
   return (
@@ -31,11 +31,11 @@ window.onload = function() {
   alt.bootstrap(JSON.stringify(bootstrap.appState))
 
   if (isServerRendering) {
-    const serverTemplate = renderToString(serverRenderProps);
-    document.getElementById('entry').innerHTML = serverTemplate;
-    return;
+    const serverTemplate = renderToString(serverRenderProps)
+    domEntryElement.innerHTML = serverTemplate
+    return
   }
 
-  render(router, entry)
+  render(router, domEntryElement)
 }
 
