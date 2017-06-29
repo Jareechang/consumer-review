@@ -1,39 +1,39 @@
-import alt from '../alt'
+import alt from '../alt';
 
 /* JSON source*/
-//import { users as friends } from '../../friends.json'
+import { users as friends } from '../../friends.json';
 
 class FriendActions {
 
   fetchFriends() {
     return (dispatch) => {
-      dispatch()
+      dispatch();
       setTimeout(() => {
-        this.updateFriends(friends)
-      }, 1000)
-    }
+        this.updateFriends(friends);
+      }, 1000);
+    };
   }
 
   filterFriends(text, friendList) {
     return (dispatch) => {
-      dispatch()
+      dispatch();
       this.updateFriends(friendList.filter(
         friend => friend.name.match(new RegExp(text, 'i'))
-      ))
-    }
+      ));
+    };
   }
 
   resetFriends() {
     return (dispatch) => {
-      dispatch()
-      this.updateFriends([])
-    }
+      dispatch();
+      this.updateFriends([]);
+    };
   }
 
-  updateFriends(friends) {
-    return friends
-  }
+  updateFriends = _friends => (
+    _friends
+  )
 }
 
-export default alt.createActions(FriendActions)
+export default alt.createActions(FriendActions);
 

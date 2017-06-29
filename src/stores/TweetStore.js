@@ -1,27 +1,27 @@
 import TweetActions from '../actions/TweetActions';
-import alt from '../alt'
+import alt from '../alt';
 
 class TweetStore {
   constructor() {
-    this.tweets = []
+    this.tweets = [];
     this.bindListeners({
       handleUpdateTweets: TweetActions.UPDATE_TWEETS,
       handleFetchTweets: TweetActions.FETCH_TWEETS_BY_USERNAME,
       handleTweetsFailed: TweetActions.TWEETS_FAILED
-    })
+    });
   }
 
   handleFetchTweets() {
-    this.tweets = [] // reset tweets
+    this.tweets = [];
   }
 
   handleTweetsFailed(errorMessage) {
-    this.errorMessage = errorMessage
+    this.errorMessage = errorMessage;
   }
 
   handleUpdateTweets(tweets) {
-    this.tweets = tweets
+    this.tweets = tweets;
   }
 }
 
-export default alt.createStore(TweetStore, 'TweetStore')
+export default alt.createStore(TweetStore, 'TweetStore');

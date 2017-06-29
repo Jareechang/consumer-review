@@ -35,7 +35,7 @@ const getClientAssets = function(rootAssetPath) {
   }
   return {
     thirdPartyAssets: getThirdPartyAssets(),
-    reactScript: generateAssetTag.script(rootAssetPath + '/' + outputFileName)
+    reactScript: generateAssetTag.script('http://localhost:3000/' + outputFileName)
   }
 };
 

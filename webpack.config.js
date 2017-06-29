@@ -6,7 +6,6 @@ var path = require('path');
 
 var publicPath = debug ? '/' : '/';
 
-
 /* Development plugins */
 const developmentPlugins = [
   new webpack.DefinePlugin({
@@ -19,7 +18,7 @@ const developmentPlugins = [
 /* Production plugins */
 const productionPlugins = [
   new webpack.optimize.DedupePlugin(),
-  new webpack.optimize.OccurenceOrderPlugin(),
+  //new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
 ];
 
@@ -28,15 +27,14 @@ module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
   entry: "./index.js",
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
+        enforce: 'pre',
         loader: 'eslint-loader',
         include : path.join(__dirname, 'src'),
         exclude : path.join(__dirname, 'node_modules')
-      }
-    ],
-    loaders: [
+      },
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
@@ -49,8 +47,8 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: [
-          'style?sourceMap',
-          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+          'style-loader?sourceMap',
+          'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
         ]
       },
       {
@@ -59,7 +57,7 @@ module.exports = {
       },
       {
         test: /\.json/,
-        loader: 'json'
+        loader: 'json-loader'
       }
     ]
   },

@@ -1,17 +1,17 @@
 import FriendActions from '../actions/FriendActions';
-import alt from '../alt'
+import alt from '../alt';
 
 class FriendStore {
   constructor() {
-    this.friends = []
+    this.friends = [];
     this.bindListeners({
       handleUpdateFriends: FriendActions.UPDATE_FRIENDS
-    })
+    });
   }
 
   handleUpdateFriends(friends) {
-    this.friends = friends
+    this.friends = friends;
   }
 }
 
-export default alt.createStore(FriendStore, 'FriendStore')
+export default alt.createStore(FriendStore, 'FriendStore');
