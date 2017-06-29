@@ -7,7 +7,7 @@
   "scripts": {
     "start-client": "webpack-dev-server --content-base src --inline --hot --port 3000",
     "set-env": "export $(cat .env | grep -v ^# | xargs)",
-    "start-server": "nodemon ./server.js",
+    "start-server": "nodemon ./server",
     "lint": "eslint -c .eslintrc src",
     "watch": "webpack --content-base src --watch",
     "build": "NODE_ENV=production webpack"

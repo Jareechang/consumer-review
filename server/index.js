@@ -4,23 +4,25 @@ require('babel-register')({
     plugins: ['css-modules-transform']
 });
 
+
+const config = require('./config.js').default;
 /* External */
 const express = require('express');
 const app = express();
 
 /* Services  */
-const TwitterService = require('./services/twitter.js');
+const TwitterService = require('../services/twitter.js');
 
 /* Config */
-const PORT = '8080' || process.env.PORT;
+const PORT = config.app.port || process.env.PORT;
 const path = require('path');
-const serverRootPath = '/news';
-const ASSET_ROOT_PATH = '/public';
+const serverRootPath = config.server.rootPath;
+const ASSET_ROOT_PATH = config.client.rootPath;
 
 const handleError = (err) => console.log(err.stack);
 
 /* Utility */
-const ServerRendering = require('./ServerRendering.js');
+const ServerRendering = require('../ServerRendering.js');
 ServerRendering.setAssetRootPath(ASSET_ROOT_PATH);
 
 app.use(ASSET_ROOT_PATH, express.static(path.join(__dirname, 'dist')));
