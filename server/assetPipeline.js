@@ -30,12 +30,15 @@ const getThirdPartyAssets = function() {
 };
 
 const generateAssetLink = function(host, port) {
-  return 'http://{host}:{port}'
+  return 'http://{host}:{port}/'
     .replace('{host}', host)
     .replace('{port}', port);
 };
 
 const getClientAssets = function(rootAssetPath) {
+  const host = config.host || 'localhost';
+  const port = config.host || '3000';
+
   if (!rootAssetPath) {
     console.warn('rootAssetPath needs to be set in order for client asset to be loaded —-- Please see ServerRendering.setAssetRootPath');
     return;

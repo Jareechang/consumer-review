@@ -23,18 +23,17 @@
     "chai": "^3.5.0",
     "chai-jquery": "^2.0.0",
     "enzyme": "^2.5.1",
-    "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.6.0",
     "eslint-plugin-jsx-a11y": "^5.1.0",
-    "eslint-plugin-react": "^7.1.0",
     "ignore-styles": "^5.0.1",
     "jquery": "^2.2.1",
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
     "webpack": "^3.0.0",
+    "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
@@ -61,6 +60,7 @@
     "react-router": "^2.8.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "twit": "^2.2.5"
+    "twit": "^2.2.5",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }
