@@ -1,4 +1,5 @@
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('../webpack.config.js');
+const config = require('./config.js').default;
 const outputFileName = webpackConfig.output.filename;
 const combineString = (p, v) => p + " " + v;
 
@@ -28,6 +29,12 @@ const getThirdPartyAssets = function() {
   return combinedStyles.reduce(combineString, "");
 };
 
+const generateAssetLink = function(host, port) {
+  return 'http://{host}:{port}'
+    .replace('{host}', host)
+    .replace('{port}', port);
+};
+
 const getClientAssets = function(rootAssetPath) {
   if (!rootAssetPath) {
     console.warn('rootAssetPath needs to be set in order for client asset to be loaded —-- Please see ServerRendering.setAssetRootPath');
@@ -35,7 +42,7 @@ const getClientAssets = function(rootAssetPath) {
   }
   return {
     thirdPartyAssets: getThirdPartyAssets(),
-    reactScript: generateAssetTag.script('http://localhost:3000/' + outputFileName)
+    reactScript: generateAssetTag.script(generateAssetLink(host, port) + outputFileName)
   }
 };
 

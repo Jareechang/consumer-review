@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const fs = require('fs');
+const path = require('path');
 const serverRootPath = '/news';
 const React = require('react');
 const ReactRouter = require('react-router');
@@ -7,8 +8,8 @@ const match = ReactRouter.match;
 const RouterContext = ReactRouter.RouterContext;
 
 /* Preloaded data */
-const tweets = require('./tweets.json');
-const friends = require('./friends.json').users;
+const tweets = require('../tweets.json');
+const friends = require('../friends.json').users;
 
 const appPreloadState = JSON.stringify({
   friends: friends,
@@ -19,17 +20,18 @@ const appPreloadState = JSON.stringify({
 const assetPipeline = require('./assetPipeline.js');
 
 /* Client routes */
-const routes = require('./src/routes/routes.js').default;
+const routes = require('../src/routes/routes.js').default;
 
 /* Client Base html template */
-const baseTemplate = fs.readFileSync(__dirname + '/src/index.template.html');
+const indexPath = path.join(__dirname, '../src/index.template.html');
+const baseTemplate = fs.readFileSync(indexPath);
 const template = _.template(baseTemplate);
 
 module.exports = {
   setAssetRootPath: function(assetRootPath) {
     this.assetRootPath = assetRootPath;
   },
-  match: function(req, res) {
+  routePath: function(req, res) {
     match({ routes: routes, location: req.url }, (error, redirectLocation, renderProps) => {
       if (error) {
         res.status(500).send(error.message);

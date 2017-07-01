@@ -22,7 +22,7 @@ const ASSET_ROOT_PATH = config.client.rootPath;
 const handleError = (err) => console.log(err.stack);
 
 /* Utility */
-const ServerRendering = require('../ServerRendering.js');
+const ServerRendering = require('./ServerRendering.js');
 ServerRendering.setAssetRootPath(ASSET_ROOT_PATH);
 
 app.use(ASSET_ROOT_PATH, express.static(path.join(__dirname, 'dist')));
@@ -43,7 +43,7 @@ app.get(['/api/tweets/', '/api/tweets/:screenName'], (req, res) => {
 app.get('/', (req, res) => res.redirect(serverRootPath));
 
 app.get('/news*', (req, res) => {
-  ServerRendering.match(req, res);
+  ServerRendering.routePath(req, res);
 });
 
 app.listen(PORT, _ => console.log('listening on %s', PORT));
