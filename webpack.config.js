@@ -48,7 +48,11 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'stage-0'],
+          presets: [
+            'react',
+            'es2015',
+            'stage-0'
+          ],
           plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
         }
       },
@@ -72,6 +76,11 @@ module.exports = {
   output: {
     path: __dirname + '/dist/',
     filename: 'index.min.js',
+    publicPath: publicPath
+  },
+  devServer: {
+    hot: true,
+    contentBase: path.resolve(__dirname, 'dist'),
     publicPath: publicPath
   },
   plugins: debug

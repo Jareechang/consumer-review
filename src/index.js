@@ -10,13 +10,22 @@ import DefaultRoutes from './routes/routes';
 const entry = document.getElementById('entry');
 const browserHistory = createBrowserHistory();
 
-const Application = (
+const Application = RouteModule => (
   <BrowserRouter history={browserHistory}>
-    <DefaultRoutes />
+    {RouteModule
+      ? (<RouteModule.default />)
+      : (<DefaultRoutes />)}
   </BrowserRouter>
 );
-const renderApplication = _ => render(Application, entry);
+const renderApplication = (RouteModule = null) =>
+  render(Application(RouteModule), entry);
 
+if (module.hot) {
+  module.hot.accept('./routes/routes', () => {
+    import('./routes/routes')
+      .then(RouteModule => renderApplication(RouteModule));
+  });
+}
 /* Asssume no serverRendering on start */
 
 window.__serverRendering = false; // this is handled by the server
