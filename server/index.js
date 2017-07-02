@@ -1,9 +1,10 @@
+// eslint-disable-line
+
 /* ES6/7 transpilation with css modules */
 require('babel-register')({
     presets: ['es2015', 'react', 'stage-0'],
     plugins: ['css-modules-transform']
 });
-
 
 /* External */
 const express = require('express');
@@ -36,14 +37,12 @@ if (isDevelopment) {
 
   // Webpack dev middleware
   app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
     publicPath: webpackConfig.output.publicPath
   }));
 
   // Webpack hot middleware
-  app.use(webpackHotMiddleware(compiler, {
-    noInfo: true,
-    publicPath: webpackConfig.output.publicPath
-  }));
+  app.use(webpackHotMiddleware(compiler));
 }
 
 app.use(ASSET_ROOT_PATH, express.static(path.join(__dirname, 'dist')));

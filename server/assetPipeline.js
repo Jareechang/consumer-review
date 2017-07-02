@@ -1,6 +1,5 @@
 const webpackConfig = require('../webpack.config.js');
 const config = require('./config.js').default;
-const outputFileName = webpackConfig.output.filename;
 const combineString = (p, v) => p + " " + v;
 
 const thirdPartyAssetConfig = {
@@ -29,23 +28,22 @@ const getThirdPartyAssets = function() {
   return combinedStyles.reduce(combineString, "");
 };
 
-const generateAssetLink = function(host, port) {
-  return 'http://{host}:{port}/'
-    .replace('{host}', host)
-    .replace('{port}', port);
+const generateAssetLink = function(config) {
+  const publicPath = config.output.publicPath;
+  const filename = config.output.filename;
+  return '{path}/{filename}'
+    .replace('{path}', publicPath)
+    .replace('{filename}', filename);
 };
 
 const getClientAssets = function(rootAssetPath) {
-  const host = config.host || 'localhost';
-  const port = config.host || '3000';
-
   if (!rootAssetPath) {
     console.warn('rootAssetPath needs to be set in order for client asset to be loaded —-- Please see ServerRendering.setAssetRootPath');
     return;
   }
   return {
     thirdPartyAssets: getThirdPartyAssets(),
-    reactScript: generateAssetTag.script(generateAssetLink(host, port) + outputFileName)
+    reactScript: generateAssetTag.script(generateAssetLink(webpackConfig))
   }
 };
 

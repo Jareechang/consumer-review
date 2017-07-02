@@ -1,10 +1,10 @@
-var debug = process.env.NODE_ENV !== "production";
+var debug = process.env.NODE_ENV !== 'production';
 
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 
-var publicPath = debug ? '/' : '/';
+var publicPath = debug ? '/public' : '/';
 
 /* Development plugins */
 const developmentPlugins = [
@@ -12,7 +12,10 @@ const developmentPlugins = [
     'process.env': {
       'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }
-  })
+
+  }),
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoEmitOnErrorsPlugin()
 ];
 
 /* Production plugins */
@@ -25,9 +28,12 @@ const productionPlugins = [
 ];
 
 module.exports = {
-  context: path.join(__dirname, "src"),
-  devtool: debug ? "inline-sourcemap" : null,
-  entry: "./index.js",
+  context: path.join(__dirname, 'src'),
+  devtool: debug ? 'inline-sourcemap' : null,
+  entry: [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000',
+    './index.js'
+  ],
   module: {
     rules: [
       {
@@ -64,8 +70,8 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + "/dist/",
-    filename: "index.min.js",
+    path: __dirname + '/dist/',
+    filename: 'index.min.js',
     publicPath: publicPath
   },
   plugins: debug

@@ -47,6 +47,7 @@ export default class Tweet extends Component {
         <div className={styles.userDisplay}>
           <img alt="profile-img" className={styles.userImage} src={tweet.user.profile_image_url} />
           <p className={styles.userName}>
+
             {tweet.user.name}
             <span className={styles.screenName}>
               @{tweet.user.screen_name}

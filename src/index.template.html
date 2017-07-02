@@ -4,12 +4,11 @@
     <%= clientAssets.thirdPartyAssets %>
     <script>
         window.__appPreloadState = <%= appPreloadState %>;
-        window.__serverRenderProps = <%= serverRenderProps %>;
         window.__serverRendering = <%= serverRendering %>;
     </script>
   </head>
   <body>
-    <div id="entry"></div>
+    <div id="entry"><%= clientPreload %></div>
   </body>
     <%= clientAssets.reactScript %>
 </html>

@@ -3,9 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const serverRootPath = '/news';
 const React = require('react');
-const ReactRouter = require('react-router');
-const match = ReactRouter.match;
-const RouterContext = ReactRouter.RouterContext;
+const ReactDOMServer = require('react-dom/server');
+const ReactRouter = require('react-router-dom');
+const StaticRouter = ReactRouter.StaticRouter;
 
 /* Preloaded data */
 const tweets = require('../tweets.json');
@@ -32,22 +32,21 @@ module.exports = {
     this.assetRootPath = assetRootPath;
   },
   routePath: function(req, res) {
-    match({ routes: routes, location: req.url }, (error, redirectLocation, renderProps) => {
-      if (error) {
-        res.status(500).send(error.message);
-      } else if (redirectLocation) {
-        res.redirect(302, redirectionLocation.pathName + redirectionLocation.search);
-      } else if (renderProps) {
-        res.status(200).write(template({
-          clientAssets: assetPipeline.getClientAssets(this.assetRootPath),
-          appPreloadState: appPreloadState,
-          serverRendering: true,
-          serverRenderProps: JSON.stringify(renderProps)
-        }));
-        res.end();
-      } else {
-        res.status(400);
-      }
-    });
+    const context = {};
+    const clientPreload = ReactDOMServer.renderToString(
+      React.createElement(StaticRouter, { location: req.url, context }, React.createElement(routes))
+    );
+
+    if (context.url) {
+      res.redirect(context.status, context.url);
+    }
+
+    res.status(200).write(template({
+      clientAssets: assetPipeline.getClientAssets(this.assetRootPath),
+      appPreloadState: appPreloadState,
+      serverRendering: true,
+      clientPreload: clientPreload
+    }));
+    res.end();
   }
 };
