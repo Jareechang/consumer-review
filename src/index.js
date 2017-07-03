@@ -13,7 +13,7 @@ const browserHistory = createBrowserHistory();
 const Application = RouteModule => (
   <BrowserRouter history={browserHistory}>
     {RouteModule
-      ? (<RouteModule.default />)
+      ? (<RouteModule />)
       : (<DefaultRoutes />)}
   </BrowserRouter>
 );
@@ -23,7 +23,7 @@ const renderApplication = (RouteModule = null) =>
 if (module.hot) {
   module.hot.accept('./routes/routes', () => {
     import('./routes/routes')
-      .then(RouteModule => renderApplication(RouteModule));
+      .then(RouteModule => renderApplication(RouteModule.default));
   });
 }
 /* Asssume no serverRendering on start */
