@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TweetContainer from './components/Tweets/index';
+import TweetContainer from './components/Tweets';
 
-import Search from './components/Search/index';
+import Search from './components/Search';
 
 const Main = _ => (
   <div className="row">
