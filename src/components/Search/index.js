@@ -32,8 +32,11 @@ export default class Search extends Component {
     });
   }
 
+  emptyTextField = value => value === '';
+
+  hasMatches = _ => this.state.matches.length > 0;
+
   handleTextChange(e) {
-    const emptyTextField = value => value === '';
     const {
       friendList
     } = this.state;
@@ -42,7 +45,7 @@ export default class Search extends Component {
       text: e.target.value
     });
 
-    if (emptyTextField(e.target.value)) {
+    if (this.emptyTextField(e.target.value)) {
       FriendActions.resetFriends();
       return;
     }
