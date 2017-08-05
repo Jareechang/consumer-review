@@ -1,7 +1,8 @@
 import alt from '../alt';
 
 /* JSON source*/
-import { users as friends } from '../../friends.json';
+//import { users as friends } from '../../friends.json';
+const friends = [];
 
 class FriendActions {
 

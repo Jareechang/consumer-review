@@ -8,8 +8,8 @@ const ReactRouter = require('react-router-dom');
 const StaticRouter = ReactRouter.StaticRouter;
 
 /* Preloaded data */
-const tweets = require('../tweets.json');
-const friends = require('../friends.json').users;
+const tweets = require('../services/tweets.json');
+const friends = require('../services/friends.json').users;
 
 const appPreloadState = JSON.stringify({
   friends: friends,

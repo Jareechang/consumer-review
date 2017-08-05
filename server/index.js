@@ -14,6 +14,8 @@ const app = express();
 /* Services  */
 const TwitterService = require('../services/twitter.js');
 
+const twitterController = require('../server/controllers/twitter.controller.js');
+
 /* Config */
 const config = require('./config.js').default;
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -61,6 +63,9 @@ app.get(['/api/tweets/', '/api/tweets/:screenName'], (req, res) => {
 })
 
 app.get('/', (req, res) => res.redirect(serverRootPath));
+
+app.get('/api/twitter/tweets/:name', twitterController.getTweetsByUsername);
+app.get('/api/twitter/friend-list', twitterController.getFriendsList);
 
 app.get(['/news', '/news/*'], (req, res) => {
   ServerRendering.routePath(req, res);
