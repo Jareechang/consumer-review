@@ -1,4 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import connectToStores from 'alt-utils/lib/connectToStores';
 
 /* Components  */
 import TweetInfo from './TweetInfo';
@@ -9,33 +12,50 @@ import TweetStore from '../../stores/TweetStore';
 /* Actions */
 import TweetActions from '../../actions/TweetActions';
 
-export default class Tweet extends Component {
+@connectToStores
+class Tweet extends Component {
   constructor(props) {
     super(props);
-    this.state = TweetStore.getState();
-    this.onChange = this.onChange.bind(this);
     this.renderTweetContainer = this.renderTweetContainer.bind(this);
   }
+
+  static propTypes = {
+    tweetStore: PropTypes.object
+  }
+
+  static defaultProps = {
+    tweetStore: {}
+  }
+
+  static getStores() {
+    return [
+      TweetStore
+    ];
+  }
+
+  static getPropsFromStores() {
+    return {
+      tweetStore: TweetStore.getState()
+    };
+  }
+
+  state = {};
 
   static propTypes = {
     styles: PropTypes.object.isRequired
   }
 
+  componentWillMount() {
+    TweetActions.fetchTweetsByUsername.defer('test');
+  }
+
   componentDidMount() {
-    TweetStore.listen(this.onChange);
-    const { tweets } = this.state;
+    //const { tweets } = this.state;
 
-    if (!tweets) {
-      TweetActions.fetchTweetsByUsername();
-    }
-  }
-
-  componentWillUnmount() {
-    TweetStore.unlisten(this.onChange);
-  }
-
-  onChange(state) {
-    this.setState(state);
+    //if (!tweets) {
+      /** TODO: make backend api query by name, currently it reads from file */
+    //TweetActions.fetchTweetsByUsername('test');
+    //}
   }
 
   renderTweetContainer(tweets) {
@@ -64,9 +84,13 @@ export default class Tweet extends Component {
 
   render() {
     const {
-      errorMessage,
-      tweets
+      errorMessage
     } = this.state;
+
+    const tweetStore = this.props.tweetStore;
+    const tweets = tweetStore.tweets || [];
+
+    console.log(tweets);
 
     if (errorMessage) {
       return (
@@ -86,3 +110,5 @@ export default class Tweet extends Component {
     );
   }
 }
+
+export default Tweet;

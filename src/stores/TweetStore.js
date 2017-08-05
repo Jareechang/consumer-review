@@ -1,26 +1,39 @@
-import TweetActions from '../actions/TweetActions';
+import { datasource } from 'alt-utils/lib/decorators';
 import alt from '../alt';
+import TweetActions from '../actions/TweetActions';
+import TweetSource from '../sources/TweetSource';
 
+@datasource(TweetSource)
 class TweetStore {
   constructor() {
     this.tweets = [];
-    this.bindListeners({
-      handleUpdateTweets: TweetActions.UPDATE_TWEETS,
-      handleFetchTweets: TweetActions.FETCH_TWEETS_BY_USERNAME,
-      handleTweetsFailed: TweetActions.TWEETS_FAILED
+
+    this.state = {
+
+    };
+
+    this.bindActions(TweetActions);
+  }
+
+  onFetchTweetsByUsername(name) {
+    this.getInstance().getTweetsByUsername(name);
+  }
+
+  onFetchTweetsByUsernameSuccess(res) {
+    if (!res) return;
+    if (!res.data) return;
+    const responseData = res.data;
+    this.setState({
+      loading: false,
+      tweets: responseData
     });
   }
 
-  handleFetchTweets() {
-    this.tweets = [];
-  }
-
-  handleTweetsFailed(errorMessage) {
-    this.errorMessage = errorMessage;
-  }
-
-  handleUpdateTweets(tweets) {
-    this.tweets = tweets;
+  onFetchTweetsByUsernameFailure(err) {
+    if (!err) return;
+    this.setState({
+      loading: false
+    });
   }
 }
 

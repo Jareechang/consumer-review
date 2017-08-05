@@ -3,7 +3,7 @@
 /* ES6/7 transpilation with css modules */
 require('babel-register')({
     presets: ['es2015', 'react', 'stage-0'],
-    plugins: ['css-modules-transform']
+    plugins: ['css-modules-transform', 'transform-decorators-legacy']
 });
 
 /* External */
@@ -63,10 +63,8 @@ app.get(['/api/tweets/', '/api/tweets/:screenName'], (req, res) => {
 })
 
 app.get('/', (req, res) => res.redirect(serverRootPath));
-
-app.get('/api/twitter/tweets/:name', twitterController.getTweetsByUsername);
+app.get('/api/twitter/tweets', twitterController.getTweetsByUsername);
 app.get('/api/twitter/friend-list', twitterController.getFriendsList);
-
 app.get(['/news', '/news/*'], (req, res) => {
   ServerRendering.routePath(req, res);
 });

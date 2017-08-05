@@ -45,7 +45,7 @@ function readDataFromFS(filePath) {
        if (err) {
          reject(err);
        }
-       resolve(data);
+       resolve(JSON.parse(data));
      });
   });
 };

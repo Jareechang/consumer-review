@@ -1,17 +1,20 @@
 //import tweets from '../../tweets.json';
-//import axios from 'axios'
-//const API_ROOT = 'http://localhost:8080'
-const tweets = [];
+import axios from 'axios';
+import TweetActions from '../actions/TweetActions';
+import { urls } from '../constants/APIroutes';
 
 const TweetSource = {
-  fetch(_screenName) {
-    // imitate AJAX call — replace with axios later
-    return new Promise((resolve, _) => {
-      setTimeout(() => {
-        resolve(tweets);
-      }, 1500);
-    });
-    //return axios.get(`${API_ROOT}/api/tweets/${screenName}`)
+  getTweetsByUsername: {
+    remote(state, screenName) {
+      const tweetsEndpoint = urls.TWITTER.TWEETS.BY_NAME;
+      return axios.get(tweetsEndpoint, {
+        params: {
+          name: screenName
+        }
+      });
+    },
+    success: TweetActions.fetchTweetsByUsernameSuccess,
+    error: TweetActions.fetchTweetsByUsernameFailure
   }
 };
 

@@ -12,7 +12,6 @@ const developmentPlugins = [
     'process.env': {
       'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }
-
   }),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin()
@@ -53,7 +52,11 @@ module.exports = {
             'es2015',
             'stage-0'
           ],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+          plugins: [
+            'react-html-attrs',
+            'transform-class-properties',
+            'transform-decorators-legacy'
+          ],
         }
       },
       {
