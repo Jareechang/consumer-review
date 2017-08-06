@@ -73,9 +73,5 @@ exports.getFriendsList = function() {
   } catch(e) {
     log('Error occured reading list from FS');
   }
-  return TwitterAPI.get('/friends/list', {}, (err, data ,response) => {
-    fs.writeFile('./friends.json', JSON.stringify(data),
-      handleError(addLog('saving friends list to friends.json'))
-    )
-  });
+  return TwitterAPI.get('/friends/list', {});
 };

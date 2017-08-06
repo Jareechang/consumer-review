@@ -1,4 +1,3 @@
-//import tweets from '../../tweets.json';
 import axios from 'axios';
 import TweetActions from '../actions/TweetActions';
 import { urls } from '../constants/APIroutes';

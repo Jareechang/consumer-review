@@ -1,4 +1,5 @@
 import { datasource } from 'alt-utils/lib/decorators';
+import Immutable from 'seamless-immutable';
 import alt from '../alt';
 import TweetActions from '../actions/TweetActions';
 import TweetSource from '../sources/TweetSource';
@@ -6,11 +7,9 @@ import TweetSource from '../sources/TweetSource';
 @datasource(TweetSource)
 class TweetStore {
   constructor() {
-    this.tweets = [];
-
-    this.state = {
-
-    };
+    this.state = Immutable({
+      tweets: []
+    });
 
     this.bindActions(TweetActions);
   }
@@ -23,17 +22,18 @@ class TweetStore {
     if (!res) return;
     if (!res.data) return;
     const responseData = res.data;
-    this.setState({
+    this.setState(this.state.merge({
       loading: false,
       tweets: responseData
-    });
+    }));
   }
 
   onFetchTweetsByUsernameFailure(err) {
     if (!err) return;
-    this.setState({
-      loading: false
-    });
+    this.setState(this.state.merge({
+      loading: false,
+      error: true
+    }));
   }
 }
 

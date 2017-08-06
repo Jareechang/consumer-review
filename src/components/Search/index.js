@@ -1,40 +1,49 @@
 import React, { Component } from 'react';
-//import { users as friends } from '../../../friends.json'
+import connectToStores from 'alt-utils/lib/connectToStores';
+import PropTypes from 'prop-types';
 
 import FriendStore from '../../stores/FriendStore';
 import FriendActions from '../../actions/FriendActions';
 import TweetActions from '../../actions/TweetActions';
 import styles from './styles.css';
 
-export default class Search extends Component {
+@connectToStores
+class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
-      friendList: FriendStore.getState().friends,
-      matches: FriendStore.getState().friends
+      friendList: [],
+      matches: []
     };
     this.handleTextChange = this.handleTextChange.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
 
-  componentDidMount() {
-    FriendStore.listen(this.onChange);
+  static propTypes = {
+    friendStore: PropTypes.object
+  };
+
+  static defaultProps = {
+    friendStore: {}
+  };
+
+  static getStores() {
+    return [
+      FriendStore
+    ];
   }
 
-  componentWillUnmount() {
-    FriendStore.unlisten(this.onChange);
+  static getPropsFromStores() {
+    return {
+      friendStore: FriendStore.getState()
+    };
   }
 
-  onChange(state) {
-    this.setState({
-      matches: state.friends
-    });
+  componentWillMount() {
+    FriendActions.fetchFriendList.defer();
   }
 
   emptyTextField = value => value === '';
-
-  hasMatches = _ => this.state.matches.length > 0;
 
   handleTextChange(e) {
     const {
@@ -53,9 +62,31 @@ export default class Search extends Component {
     FriendActions.filterFriends(e.target.value, friendList);
   }
 
+  hasNoResults = users => users && users.length === 0;
+
+  renderMatchedResults = (users) => {
+    if (this.hasNoResults()) {
+      return <div />;
+    }
+    return users.map(user => (
+      <button key={user.id}>
+        <img alt="profile-img" className={styles.userImage} src={user.profile_image_url} />
+        <p className={styles.userName}> {user.name} </p>
+      </button>
+    ));
+  }
+
   render() {
-    const hasMatches = () => this.state.matches.length > 0;
+    const hasMatches = true;
     const SearchComponent = this;
+    const friendStore = this.props.friendStore;
+    const friends = friendStore.friendList || [];
+
+    if (!friends) {
+      return (
+        <div> loading ... </div>
+      );
+    }
 
     const resetSearchAndGetTweetsBy = user => (
       {
@@ -81,9 +112,6 @@ export default class Search extends Component {
         </button>
       );
 
-    const renderMatchedResults = users =>
-      users.map(user => userAutocompleteDisplay(user));
-
     return (
       <div className={styles.searchSection}>
         <div className="input-group">
@@ -97,10 +125,12 @@ export default class Search extends Component {
             <button className="btn btn-secondary">Search</button>
           </span>
         </div>
-        <div className={`${hasMatches() ? styles.showMatches : ''} ${styles.results}`}>
-          {renderMatchedResults(this.state.matches)}
+        <div className={`${hasMatches ? styles.showMatches : ''} ${styles.results}`}>
+          {this.renderMatchedResults(friends)}
         </div>
       </div>
     );
   }
 }
+
+export default Search;

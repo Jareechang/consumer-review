@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import connectToStores from 'alt-utils/lib/connectToStores';
 
-/* Components  */
 import TweetInfo from './TweetInfo';
-
-/* Store */
 import TweetStore from '../../stores/TweetStore';
-
-/* Actions */
 import TweetActions from '../../actions/TweetActions';
 
 @connectToStores
@@ -49,16 +43,7 @@ class Tweet extends Component {
     TweetActions.fetchTweetsByUsername.defer('test');
   }
 
-  componentDidMount() {
-    //const { tweets } = this.state;
-
-    //if (!tweets) {
-      /** TODO: make backend api query by name, currently it reads from file */
-    //TweetActions.fetchTweetsByUsername('test');
-    //}
-  }
-
-  renderTweetContainer(tweets) {
+  renderTweetContainer = (tweets) => {
     const {
       styles
     } = this.props;
@@ -83,16 +68,10 @@ class Tweet extends Component {
   }
 
   render() {
-    const {
-      errorMessage
-    } = this.state;
-
     const tweetStore = this.props.tweetStore;
     const tweets = tweetStore.tweets || [];
-
-    console.log(tweets);
-
-    if (errorMessage) {
+    const isErrorResponse = tweetStore.error;
+    if (isErrorResponse) {
       return (
         <div>Something is wrong</div>
       );
@@ -102,7 +81,6 @@ class Tweet extends Component {
       return (<div> loading... </div>);
     }
 
-    /* Make Tweet Card component */
     return (
       <div>
         {this.renderTweetContainer(tweets)}

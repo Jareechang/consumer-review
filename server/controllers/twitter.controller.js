@@ -12,6 +12,6 @@ exports.getTweetsByUsername = function(req, res) {
 exports.getFriendsList = function(req, res) {
   twitterService.getFriendsList()
     .then((data) => {
-      return res.jsonp(data);
+      return res.jsonp(data.users);
     });
 };
