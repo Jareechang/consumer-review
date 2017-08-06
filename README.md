@@ -14,7 +14,7 @@ export $(cat .env | grep -v ^# | xargs)
 
 ##### Commands
 
-**Server:** `yarn start-server`
+**Server:** `yarn start-server`     
 **Client:** `yarn start-client` (default port: 3000)
 
 Upon running, visit http://localhost:8080.
