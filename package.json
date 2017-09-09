@@ -10,7 +10,8 @@
     "start-server": "NODE_ENV=development nodemon --ignore ./src ./server",
     "lint": "eslint -c .eslintrc src",
     "watch": "webpack --content-base src --watch",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +29,7 @@
     "eslint-plugin-import": "^2.6.0",
     "eslint-plugin-jsx-a11y": "^5.1.0",
     "ignore-styles": "^5.0.1",
+    "jest": "^21.0.2",
     "jquery": "^2.2.1",
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
