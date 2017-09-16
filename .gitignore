@@ -10,3 +10,6 @@ friends.json
 # dist assets
 dist/
 *.log
+
+# jest coverage files
+coverage/*
