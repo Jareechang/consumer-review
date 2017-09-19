@@ -1,4 +1,3 @@
-import sum from '../sum';
 import FriendStore from '../stores/FriendStore';
 import alt from '../alt';
 
